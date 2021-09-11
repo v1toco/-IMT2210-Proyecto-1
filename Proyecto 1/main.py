@@ -1,5 +1,5 @@
-from vec import Vec
-import pandas as pd
+import vec
+#import pandas as pd
 # EJERCICIO A:
 # leer el archivo rating.csv, sacar cuanto es el maximo de usuarios y asi recorrer
 # en un ciclo for. Dentro del for crear un obj clase Vec, donde dominio son
@@ -36,12 +36,12 @@ for linea in a:
         if id_us == id_actual:
             dicc[id_pel] = ratio
         else:
-            vector = Vec(dominio, dicc)
+            vector = vec.Vec(dominio, dicc)
             users[id_actual] = vector
             dicc = {}
             dicc[id_pel] = ratio
             id_actual = id_us
-vector = Vec(dominio, dicc)
+vector = vec.Vec(dominio, dicc)
 users[id_us] = vector
 #####################################################################
 # EJERCICIO B:
@@ -78,10 +78,10 @@ for linea in a:
     if id_us.isnumeric() == True:
         lista_g.append([int(id_us), int(id_pel), int(ratio)])
 
-def ordenar_peliculas(lista):
+def ordenar_segundo(lista):
     return(lista[1])
 
-lista_g.sort(key = ordenar_peliculas)
+lista_g.sort(key = ordenar_segundo)
 
 pel_actual = 1
 dicc = {}
@@ -94,16 +94,49 @@ for linea in lista_g:
     if id_pel == pel_actual:
         dicc[id_us] = ratio
     else:
-        vector = Vec(dominio2, dicc)
+        vector = vec.Vec(dominio2, dicc)
         movies[pel_actual] = vector
         dicc = {}
         dicc[id_us] = ratio
         pel_actual = id_pel
-vector = Vec(dominio2, dicc)
+vector = vec.Vec(dominio2, dicc)
 movies[id_pel] = vector
 
 #####################################################################################
 # Ejercicio 3:
+def sim(u, v):
+    punto =  vec.dot(u,v)
+    punto_2 = (vec.dot(u,u))**(1/2)
+    punto_3 = (vec.dot(v, v))**(1/2)
+    r = punto/(punto_2*punto_3)
+    return r
+
+def vecinos(users, user_id, k):
+    usuario = users[user_id]
+    lista_sim = []
+    for i in users:
+        if i != user_id:
+            simp = sim(usuario, users[i])
+            lista_sim.append([i, simp])
+    lista_sim.sort(key = ordenar_segundo, reverse = True )
+    lista_vecinos = []
+    for i in range(k):
+        lista_vecinos.append(tuple(lista_sim[i]))
+    return lista_vecinos
+
+a = vecinos(users, 9 , 3)
+print(a)
+
+
+
+
+
+
+
+
+    
+
+
 
 
 
