@@ -3,21 +3,20 @@ import pandas as pd
 # EJERCICIO A:
 # leer el archivo rating.csv, sacar cuanto es el maximo de usuarios y asi recorrer
 # en un ciclo for. Dentro del for crear un obj clase Vec, donde dominio son
-# ids TODAS peliculas y la función es un diccionario con movie id → rating 
+# ids TODAS peliculas y la función es un diccionario con movie id → rating
 # Crear diccionario users, utilizando la sintaxis users[user id] = user vec
 
 with open('movies.csv', 'r') as docu:
     arc = docu.readlines()
-    #el len(arc) es uno mas que el ult id de pelicula
+    # el len(arc) es uno mas que el ult id de pelicula
     lista_pelis = []
     for i in range(1, len(arc)):
         lista_pelis.append(i)
     dominio = set(lista_pelis)
-    
-    ###dominio para cada clase vec
 
+    # dominio para cada clase vec
 
-
+# soy benjita btw
 
 
 with open('ratings.csv', 'r') as file:
@@ -25,7 +24,7 @@ with open('ratings.csv', 'r') as file:
 
 id_actual = 1
 dicc = {}
-users = {} 
+users = {}
 
 for linea in a:
     linea = linea.strip('\n')
